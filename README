@@ -1,0 +1,20 @@
+About
+=====
+
+RevRaiser is a bare-boned straight-forward on-line fund raising application. It
+was written to raise funding for a laser-cutter for hackerspace [Revelation
+Space][1] in The Hague, NL.
+
+Consult subdirectory ./doc for details on installation and setup.
+
+More information can be found on [the project wiki page][2].
+
+License
+=======
+
+This work is released under the General Public License version 3. Please
+consult ./LICENSE for details.
+
+[1]: https://revspace.nl/
+[2]: https://revspace.nl/RevelationSpace/FundraiserSite
+
