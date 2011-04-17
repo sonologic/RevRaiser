@@ -28,7 +28,7 @@ settings.
 
 Next, create your first campaign:
 
-insert into campaign (template,goal,pledge_deadline,payment_deadline) values ('example_',300000,'2011-05-20','2011-07-20');
+insert into campaign (template,goal,minimum,pledge_deadline,payment_deadline) values ('example_',300000,1000,'2011-05-20','2011-07-20');
 
 And you're good to go.
 
