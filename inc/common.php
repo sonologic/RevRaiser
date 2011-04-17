@@ -29,6 +29,7 @@ require_once('inc/local_settings.php');
 
 $dispatch=array(
   '*' => 'pledge.php',
+  'pledge' => 'pledge.php',
   'confirm' => 'confirm.php',
   'pay' => 'pay.php',
   'payed' => 'payed.php',

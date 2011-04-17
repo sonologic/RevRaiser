@@ -41,6 +41,9 @@ $session_data->DB=$DB;
 // TODO: implement campaign vhosting, for now select default campaign
 $session_data->campaign=get_campaign($session_data,DEFAULTCAMPAIGN);
 
+// process form
+process_form($session_data);
+
 // render page body
 $title=render_title($session_data);
 $body=render_body($session_data);
