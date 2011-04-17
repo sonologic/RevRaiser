@@ -25,17 +25,35 @@
 
 require_once('inc/common.php');
 
-// TODO: implement campaign vhosting, for now select default campaign
-$campaign=get_campaign(DEFAULTCAMPAIGN);
 
-// render landing page body
-$body=render($campaign['template'],'landing',array());
+// include page rendering code dependingn on p GET parameter
+$p=(isset($_GET['p']))?$_GET['p']:'*';
+if(!preg_match('/^[a-z*]+$/',$p)) die('Invalid parameter value for p.');
+
+if(isset($dispatch[$p])) {
+  require_once($dispatch[$p]);
+} else {
+  die('Invalid parameter value for p.');
+}
+
+// set up session data
+$session_data->DB=$DB;
+// TODO: implement campaign vhosting, for now select default campaign
+$session_data->campaign=get_campaign($session_data,DEFAULTCAMPAIGN);
+
+// render page body
+$title=render_title($session_data);
+$body=render_body($session_data);
+
+//$body=render($campaign['template'],'landing',array());
 
 // render html output
 $args=array(
-  'TITLE' => 'Pledge',
+  'TITLE' => $title,
   'BODY' => $body,
 );
-echo render($campaign['template'],'page',$args);
+
+// output to browser
+echo render($session_data->campaign->TEMPLATE,'page',$args);
 
 ?>

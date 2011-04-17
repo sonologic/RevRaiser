@@ -27,16 +27,21 @@ require_once('inc/template.php');
 require_once('inc/adodb5/adodb.inc.php');
 require_once('inc/local_settings.php');
 
+$dispatch=array(
+  '*' => 'pledge.php',
+  'confirm' => 'confirm.php',
+  'pay' => 'pay.php',
+  'payed' => 'payed.php',
+);
+
 $DB = NewADOConnection(DBTYPE);
 
 $DB->Connect(DBHOST,DBUSER,DBPASS,DBNAME);
 
-function get_campaign($id) {
-  global $DB;
-
-  $rs = $DB->Execute("select * from campaign where id=?",array($id));
+function get_campaign($session_data,$id) {
+  $rs = $session_data->DB->Execute("select * from campaign where id=?",array($id));
   if(!$rs->EOF) {
-    return $rs->FetchRow();
+    return $rs->FetchObject();
   }
 
   return NULL; 
