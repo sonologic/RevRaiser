@@ -31,8 +31,8 @@ function process_form($session_data) {
 	// TODO: does adodb actually handle escaping securely ?
     $sql="insert into pledge (campaign_id,name,street_address1,street_address2,zipcode,city,country,email,amount,remark,confirm_hash) values (?,?,?,?,?,?,?,?,?,?,?)";
 
-	// TODO: validate email
     $email=$_POST['email'];
+    if(!valid_email($email)) array_push($session_data->error,"Email address not valid.");
 
     if(!strlen($_POST['name'])) array_push($session_data->error,"Please provide name.");
     if(!strlen($_POST['street1'])) array_push($session_data->error,"Please provide address.");
@@ -63,7 +63,21 @@ function process_form($session_data) {
        
     $succes=$session_data->DB->Execute($sql,$values);
 
-    if(!$succes) array_push($session_data->error,$session_data->DB->ErrorMsg());
+    if(!$succes) { 
+      array_push($session_data->error,$session_data->DB->ErrorMsg());
+    } else {
+
+      $message=render($session_data->campaign->TEMPLATE,'pledge_mail',array('HASH'=>$hash));
+
+      $ec=mail(
+            $email,
+            'Your pledge for project '.$session_data->campaign->SHORTDESC,
+	    $message
+	  );
+      if(!$ec) {
+        array_push($session_data->error,'Could not send confirmation email, please contact '.$session_data->campaign->ADMIN_EMAIL);
+      }
+    }
 
     $session_data->pledge=TRUE;
   } else {
@@ -76,6 +90,7 @@ function render_title($session_data) {
 }
 
 function render_body($session_data) {
+
   if($session_data->pledge==NULL) {
     $values=array(
 	'ACTION'=>'?p=pledge',
