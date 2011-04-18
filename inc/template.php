@@ -32,6 +32,7 @@ function render($prefix,$template,$values) {
   foreach($values as $key => $value) {
     $tmpl=str_replace('%'.$key.'%',$value,$tmpl);
   }
+  $tmpl=str_replace('%URLBASE%',URLBASE,$tmpl);
 
   return $tmpl;
 }

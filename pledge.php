@@ -93,7 +93,7 @@ function render_body($session_data) {
 
   if($session_data->pledge==NULL) {
     $values=array(
-	'ACTION'=>'?p=pledge',
+	'ACTION'=>URLBASE.'?p=pledge',
 	'FEEDBACK'=>'',
 	'NAME'=>'',
 	'STREET1'=>'',
@@ -113,7 +113,7 @@ function render_body($session_data) {
       }
 
       $values=array(
-	'ACTION'=>'?p=pledge',
+	'ACTION'=>URLBASE.'?p=pledge',
 	'FEEDBACK'=>$errors,
 	'NAME'=>htmlentities($_POST['name']),
 	'STREET1'=>htmlentities($_POST['street1']),

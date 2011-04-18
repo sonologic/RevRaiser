@@ -23,6 +23,9 @@
 **    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// URL base
+define('URLBASE','http://localhost/');
+
 // database details
 define('DBHOST','localhost');
 define('DBUSER','pledge');
