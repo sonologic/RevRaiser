@@ -1,2 +1,7 @@
+r0.3:
 - add maketext to make strings multi-lingual
 - add support for multilingual templates
+
+r0.2:
+- copy mail to admin
+- sanitize pledge amount
