@@ -41,6 +41,9 @@ $session_data->DB=$DB;
 // TODO: implement campaign vhosting, for now select default campaign
 $session_data->campaign=get_campaign($session_data,DEFAULTCAMPAIGN);
 
+// TODO: get from db:
+$session_data->campaign->PLEDGED=166300;
+
 // process form
 process_form($session_data);
 
@@ -54,6 +57,9 @@ $body=render_body($session_data);
 $args=array(
   'TITLE' => $title,
   'BODY' => $body,
+  'PLEDGED' => render_amount($session_data->campaign->PLEDGED),
+  'DIFFERENCE' => render_amount($session_data->campaign->GOAL - $session_data->c
+ampaign->PLEDGED),
 );
 
 // output to browser
