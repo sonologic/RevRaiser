@@ -26,6 +26,9 @@
 
 function render($prefix,$template,$values) {
   $file='templates/'.$prefix.$template.'.tmpl';
+  if(!file_exists($file)) {
+    $file='templates/'.DEFAULTTMPL.$template.'.tmpl';
+  }
   $tmpl=implode('',file($file))
     or die('No such template: '.$file);
 

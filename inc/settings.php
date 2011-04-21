@@ -26,6 +26,9 @@
 // URL base
 define('URLBASE','http://localhost/');
 
+// fallback template prefix
+define('DEFAULTTMPL','example_');
+
 // database details
 define('DBHOST','localhost');
 define('DBUSER','pledge');

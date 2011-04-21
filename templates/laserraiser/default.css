@@ -1,0 +1,149 @@
+
+body
+{
+	background: #e0e6a2;
+	margin: 0;
+	width: 1000px;
+	font-family: serif;
+}
+
+.progressbar
+{
+	height: 36px;
+	padding: 0 0 0 18px;
+	width: 590px;
+	background: #003e00 url(laserstart.png) no-repeat;
+}
+
+.progressbar .progress
+{
+	width: 100%;
+	background: url(laserbeam.png) no-repeat;
+	height: 36px;
+}
+
+.pledgebox
+{
+	width: 240px;
+	background: #d6d9f0;
+	padding: 8px;
+	margin: 8px 0 8px auto;
+}
+
+.pledgebox button
+{
+	display: block;
+	margin: 8px auto 8px auto;
+}
+
+dl.progressnumbers
+{
+	font-family: sans-serif;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+.progressnumbers dt
+{
+	float:left;
+	clear:left;
+	margin: 0;
+	padding: 0;
+	width: 8em;
+}
+
+.progressnumbers dt:after
+{
+	content: ": ";
+}
+
+.progressnumbers dd
+{
+	float:left;
+	margin: 0;
+	padding: 0;
+}
+
+.logo
+{
+	position: absolute;
+	width: 144px;
+	height: 112px;
+	left: 215px;
+	top: 6px;
+}
+
+.column
+{
+	display: block;
+	position: relative;
+	margin: 0;
+	padding: 8px 32px 8px 32px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.header
+{
+	width: 680px;
+	height: 144px;
+	background: url(headerback.png) no-repeat;
+	background-position: 210px 0px;
+}
+
+.content
+{
+	width: 608px;
+	background: #fff;
+}
+
+.spacedescr
+{
+	font-size: 16px;
+	font-family: sans-serif;
+	position: absolute;
+	display: block;
+	width: 188px;
+	font-weight: bold;
+	text-align: right;
+	line-height: 1.25em;
+	left: 0;
+	top: 32px;
+	margin: 0;
+}
+
+ul.navigation
+{
+	display: block;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0 32px 0 16px;
+	position: absolute;
+	right: 16px;
+	bottom: 48px;
+}
+
+ul.navigation li
+{
+	font-family: sans-serif;
+	display: inline;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+ul.navigation li:before { content: " | "; }
+ul.navigation li:first-child:before { content: ""; }
+
+ul.navigation li a
+{
+	text-decoration: none;
+	color: Black;
+}
+
+ul.navigation li a:hover
+{
+	text-decoration: underline;
+}
+
+
