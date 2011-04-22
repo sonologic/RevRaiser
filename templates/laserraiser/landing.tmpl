@@ -9,6 +9,14 @@
 				    $('#pledgeopen').hide('slow');
 				    $('#pledgeform').show('slow');
 				  });
+				  $('#tldr').click(function() {
+				    $('#longtext').hide('slow');
+				    $('#shorttext').show('slow');
+				  });
+				  $('#longer').click(function() {
+				    $('#longtext').show('slow');
+				    $('#shorttext').hide('slow');
+				  });
 				});
 
 $.extend({
@@ -46,8 +54,12 @@ $.extend({
 			</div>
 
 		</div>
-
-<h2>Help a hackerspace</h2>
+<div id="shorttext" style="display: none;">
+<h2>REVSPACE WANTS LASERCUTTER! WE ARE POOR SODS! WE NEED YOUR MONIEZ! PLEDGE NOW! PLEDGE LIBERALLY!</h2>
+<p>(<a href="#" id="longer">whut</a>)</p>
+</div>
+<div id="longtext">
+<h2>Help a hackerspace (<a href="#" id="tldr">TL;DR</a>)</h2>
 
 <p>Revelation Space, the hackerspace in The Hague, needs a laser cutter! A bit more than a year has passed since receiving the key to our space, and we are quite settled in. The validity of the concept has been proven. We now have a shop with a nice array of basic tools, and are ready for the next step.</p>
 
@@ -75,4 +87,4 @@ $.extend({
 <p>Revelation Space was founded mid-2009 and moved in to the current space in December 2009. Currently the space has almost 40 paying members from The Hague, Rotterdam, Delft and Zoetermeer. The ambition is to double this number by the end of 2011. In its short existence, the space has hosted several events such as a GNU hackers meetup, "Echte Hackers" and the Dutch Perl Workshop. It acts as a hub and meeting place for community-related groups around the country and beyond. National media have covered the hackerspace, both in printed media, on the web and on television. With a radio studio, a tool shop, electronics lab, library, dark room, radio studio and general purpose area the 400 square meters are optimally used for a diverse array of activities. For an overview of current projects, we refer the reader to our project page on the RevSpace? wiki.</p>
 
 <p>Revelation Space is part of a global movement of loosely connected groups with roughly the same interests. Although there are a lot of differences in the way the various hackerspaces around the world operate, they tend to share a common mind-set of experimentation, innovation and creativity. It is a place were warranties are voided. We study electronic and mechanical equipment, processes and even human culture. We try to understand, and improve.</p>
-
+</div>
