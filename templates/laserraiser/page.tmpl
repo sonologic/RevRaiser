@@ -4,16 +4,73 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<!-- <meta http-equiv="Cache-Control" content="no-cache" /> -->
 	<link rel="stylesheet" href="templates/laserraiser/default.css" title="Normal" />
-	<title>RevSpace Lasercutter Fundraiser - %TITLE%</title>
-	<script language="Javascript">
-		  var pos_min = -987, pos_max = -490;
-                  var fund_goal = %GOAL%;
-                  var fund_pledged = %PLEDGED%;
-                  var fund_difference = %DIFFERENCE%;
+	<title>RevSpace Lasercutter Fundraiser</title>
+	<script type="text/javascript" src="templates/laserraiser/dragdealer.js" />
+	<script type="text/javascript">
+	/*<![CDATA[*/
+
+		var amounts = [];
+		function init_amounts()
+		{
+			for (var i=10; i<=100; i+=5)
+				amounts.push(i);
+			for (var i=110; i<=500; i+=10)
+				amounts.push(i);
+			for (var i=550; i<=1000; i+=50)
+				amounts.push(i);
+			for (var i=1100; i<=3000; i+=100)
+				amounts.push(i);
+		}
+
+		function get(name)
+		{
+			return document.getElementById(name);
+		}
+
+		var pos_min = -987, pos_max = -490;
+		var fund_goal = 3500.;
+		var fund_pledged = 1337.;
+
+		function pledge_amount(n)
+		{
+			return amounts[Math.round((amounts.length-1)*n)];
+		}
+
+		function set_laser(pledged)
+		{
+			var frac = pledged/fund_goal;
+			if (frac > 1)
+			{
+				get('laser_reflection').style.visibility = 'visible';
+				frac = 1.;
+			}
+			else
+			{
+				get('laser_reflection').style.visibility = 'hidden';
+			}
+			get('laser_progress').style.backgroundPosition = (pos_min*(1-frac) + pos_max*frac) + 'px';
+		}
+
+		function init()
+		{
+			init_amounts();
+			new Dragdealer('pledge_slider',
+			{
+				animationCallback: function(x, y)
+				{
+					var n = pledge_amount(x);
+					set_laser(fund_pledged+n);
+					get('pledge_slider_handle').textContent = 'EUR '+n;
+				}
+			});
+			set_laser(fund_pledged);
+		}
+
+	/* ]]> */
 	</script>
 
 </head>
-<body>
+<body onload="init();">
 	<div class="column header">
 		<div class="spacedescr">Revelation Space<br />Hackerspace<br />The Hague</div>
 		<img class="logo" src="templates/laserraiser/revlogo.png" alt="Revspace Logo" />
@@ -29,13 +86,13 @@
 	<div class="column content">
 		<h1>RevSpace Lasercutter Fundraiser</h1>
 
-		<div class="progressbar"><div id="laser_progress" class="progress" style="background-position: -800px"></div></div>
-
+		<div class="progressbar">
+			<div id="laser_progress" class="progress" style="background-position: -800px"></div>
+			<div id="laser_reflection" class="reflection"></div>
+		</div>
 %BODY%
-
 	</div>
 	<div class="column footer">
-
 	</div>
 
 </body>

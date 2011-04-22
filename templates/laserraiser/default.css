@@ -7,8 +7,35 @@ body
 	font-family: serif;
 }
 
+.clear
+{
+	clear: both;
+}
+
+.slider {
+	position: relative;
+	height: 30px;
+	background: #EEE;
+}
+.slider .handle {
+	position: absolute;
+	cursor: pointer;
+}
+.slider .handle {
+	width: 100px;
+	height: 30px;
+	background: #009900;
+	color: #FFF;
+	line-height: 30px;
+	text-align: center;
+}
+.slider .disabled {
+	background: #898989;
+}
+
 .progressbar
 {
+	position: relative;
 	height: 36px;
 	padding: 0 0 0 18px;
 	width: 590px;
@@ -20,11 +47,23 @@ body
 	width: 100%;
 	background: url(laserbeam.png) no-repeat;
 	height: 36px;
+	position: absolute;
+}
+
+.progressbar .reflection
+{
+	width: 36px;
+	background: url(laserbeamup.png) no-repeat;
+	height: 200px;
+	position: absolute;
+	left: 497px;
+	bottom: 18px;
+	visibility: hidden;
 }
 
 .pledgebox
 {
-	width: 240px;
+	width: 592px;
 	background: #d6d9f0;
 	padding: 8px;
 	margin: 8px 0 8px auto;

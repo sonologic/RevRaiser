@@ -58,8 +58,7 @@ $args=array(
   'TITLE' => $title,
   'BODY' => $body,
   'PLEDGED' => render_amount($session_data->campaign->PLEDGED),
-  'DIFFERENCE' => render_amount($session_data->campaign->GOAL - $session_data->c
-ampaign->PLEDGED),
+  'DIFFERENCE' => render_amount($session_data->campaign->GOAL - $session_data->campaign->PLEDGED),
 );
 
 // output to browser
