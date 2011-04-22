@@ -23,6 +23,8 @@
 **    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+header("Content-type: application/xhtml+xml");
+
 require_once('inc/common.php');
 
 
