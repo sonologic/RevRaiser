@@ -5,6 +5,7 @@
 	<!-- <meta http-equiv="Cache-Control" content="no-cache" /> -->
 	<link rel="stylesheet" href="templates/laserraiser/default.css" title="Normal" />
 	<title>RevSpace Lasercutter Fundraiser - %TITLE%</title>
+	<script type="text/javascript" src="templates/laserraiser/jquery-1.5.2.min.js"></script>
 	<script type="text/javascript" src="templates/laserraiser/dragdealer.js"></script>
 	<script type="text/javascript">
 	/*<![CDATA[*/
@@ -33,6 +34,9 @@
 
 		function pledge_amount(n)
 		{
+			var amount=amounts[Math.round((amounts.length-1)*n)];
+
+			$('#pledge_amount_input').val(amount);
 			return amounts[Math.round((amounts.length-1)*n)];
 		}
 

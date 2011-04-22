@@ -1,4 +1,13 @@
 		<div class="pledgebox">
+			<script type="text/javascript">
+				$(document).ready(function() {
+				  $('#pledgeform').hide();
+				  $('#slider_submit').click(function() {
+				    $('#pledgeopen').hide('slow');
+				    $('#pledgeform').show('slow');
+				  });
+				});
+			</script>
 			<dl class="progressnumbers">
 				<dt>Pledged</dt><dd>EUR %PLEDGED%</dd>
 				<dt>Still needed</dt><dd>EUR %GOAL%</dd>
@@ -8,8 +17,13 @@
 			<div id="pledge_slider" class="slider">
 				<div id="pledge_slider_handle" class="handle">drag me</div>
 			</div>
+			<div id="pledgeopen">
+			<button type="submit" name="step" value="2" id="slider_submit">Pledge Now!</button>
+			</div>
+			<div id="pledgeform">
+			%PLEDGEFORM%
+			</div>
 
-			<button type="submit" name="step" value="2">Pledge Now!</button>
 		</div>
 
 <h2>Help a hackerspace</h2>
@@ -21,8 +35,6 @@
 <h2>How to help</h2>
 
 <p>A laser cutter is a very expensive machine. We can manage part of this cost among us, but are collecting donations to help pay for the laser cutter. This is to add to the amount collected from our members and sponsors. Our end goal is to collect a total amount of EUR 4000,-, the cost of FILL-IN-PRODUCT-NAME. You can pledge any amount you see fit towards reaching this goal. We will only collect the actual euro's once we have reached the desired amount. If we fail to get enough pledges before July 31st, we will abort the mission and not collect any money. In case you all pledge an amount surpassing what we need to obtain the lasercutter, the surplus will go towards a vinyl cutter and/or a lathe.</p>
-
-%PLEDGEFORM%
 
 <h2>What's in it for me??</h2>
 
