@@ -93,7 +93,7 @@ function render_body($session_data) {
 
   if($session_data->pledge==NULL) {
     $values=array(
-	'ACTION'=>URLBASE.'?p=pledge',
+	'ACTION'=>URLBASE.'?p=pledge&amp;h=0',
 	'FEEDBACK'=>'',
 	'NAME'=>'',
 	'STREET1'=>'',
