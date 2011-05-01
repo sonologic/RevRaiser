@@ -40,6 +40,15 @@
 			return amounts[Math.round((amounts.length-1)*n)];
 		}
 
+		function drag_amount(n)
+		{
+			var state=0;
+			for (var i=0; i<=amounts.length; i++) {
+				if(amounts[i]>n) break;
+                        }
+			dragdealer.setValue(amounts.length/n);
+		}
+
 		function set_laser(pledged)
 		{
 			var frac = pledged/fund_goal;
@@ -55,10 +64,14 @@
 			get('laser_progress').style.backgroundPosition = (pos_min*(1-frac) + pos_max*frac) + 'px';
 		}
 
+		var dragdealer;
+
+		var agent=0;
+
 		function init()
 		{
 			init_amounts();
-			new Dragdealer('pledge_slider',
+			dragdealer = new Dragdealer('pledge_slider',
 			{
 				animationCallback: function(x, y)
 				{
@@ -67,7 +80,22 @@
 					get('pledge_slider_handle').textContent = 'EUR '+n;
 				}
 			});
+
 			set_laser(fund_pledged);
+
+			$('#pledge_amount_input').change(function() {
+                        	var state=0;
+				var n=$('#pledge_amount_input').val();
+				var i;
+
+                        	for (i=0; i<amounts.length; i++) {
+                                	if(amounts[i]>n) break;
+                        	}
+
+				if(amounts[i-1]!=n) i++;
+
+                        	dragdealer.setValue((i-1)/(amounts.length-1));
+			});
 		}
 
 	/* ]]> */
