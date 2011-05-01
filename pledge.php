@@ -28,7 +28,6 @@ function process_form($session_data) {
 
   if(isset($_POST['pledge'])) {
 
-	// TODO: does adodb actually handle escaping securely ?
     $sql="insert into pledge (campaign_id,name,street_address1,street_address2,zipcode,city,country,email,amount,remark,confirm_hash) values (?,?,?,?,?,?,?,?,?,?,?)";
 
     $email=$_POST['email'];
