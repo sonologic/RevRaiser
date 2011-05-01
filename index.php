@@ -42,9 +42,7 @@ if(isset($dispatch[$p])) {
 $session_data->DB=$DB;
 // TODO: implement campaign vhosting, for now select default campaign
 $session_data->campaign=get_campaign($session_data,DEFAULTCAMPAIGN);
-
-// TODO: get from db:
-$session_data->campaign->PLEDGED=166300;
+$session_data->campaign->PLEDGED=get_pledge_total($session_data);
 
 // process form
 process_form($session_data);

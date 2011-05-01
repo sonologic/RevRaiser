@@ -57,6 +57,15 @@ function get_pledge($session_data,$hash) {
   return NULL; 
 }
 
+function get_pledge_total($session_data) {
+  $rs = $session_data->DB->Execute("select sum(amount) as pledge_total from pledge where confirmed is not null and campaign_id=?",array($session_data->campaign->ID));
+  if(!$rs->EOF) {
+    return $rs->fields['pledge_total'];
+  }
+
+  return 0; 
+}
+
 function cancel_pledge($session_data,$hash) {
   return $session_data->DB->Execute("delete from pledge where confirm_hash=?",array($hash));
 }
