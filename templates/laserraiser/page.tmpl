@@ -68,7 +68,7 @@
 
 		var agent=0;
 
-		function init()
+		$(document).ready(function init()
 		{
 			init_amounts();
 			dragdealer = new Dragdealer('pledge_slider',
@@ -96,12 +96,12 @@
 
                         	dragdealer.setValue((i-1)/(amounts.length-1));
 			});
-		}
+		});
 
 	/* ]]> */
 	</script>
 </head>
-<body onload="init();">
+<body onload="">
 	<div class="column header">
 		<div class="spacedescr">Revelation Space<br />Hackerspace<br />The Hague</div>
 		<img class="logo" src="templates/laserraiser/revlogo.png" alt="Revspace Logo" />

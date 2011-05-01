@@ -1,57 +1,11 @@
 		<div class="pledgebox">
-			<script type="text/javascript">
-			/*<![CDATA[*/
-				$(document).ready(function() {
-				  if($.getUrlVar('h')!='0') {
-				    $('#pledgeform').hide();
-				  }
-				  $('#slider_submit').click(function() {
-				    $('#pledgeopen').hide('slow');
-				    $('#pledgeform').show('slow');
-				  });
-				  $('#tldr').click(function() {
-				    $('#longtext').hide('slow');
-				    $('#shorttext').show('slow');
-				  });
-				  $('#longer').click(function() {
-				    $('#longtext').show('slow');
-				    $('#shorttext').hide('slow');
-				  });
-				});
-
-$.extend({
-  getUrlVars: function(){
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-      hash = hashes[i].split('=');
-      vars.push(hash[0]);
-      vars[hash[0]] = hash[1];
-    }
-    return vars;
-  },
-  getUrlVar: function(name){
-    return $.getUrlVars()[name];
-  }
-});
-			/* ]]> */
-			</script>
 			<dl class="progressnumbers">
 				<dt>Pledged</dt><dd>EUR %PLEDGED%</dd>
 				<dt>Still needed</dt><dd>EUR %DIFFERENCE%</dd>
 
 			</dl>
 			<div class="clear"></div>
-			<div id="pledge_slider" class="slider">
-				<div id="pledge_slider_handle" class="handle">drag me</div>
-			</div>
-			<div id="pledgeopen">
-			<button type="submit" name="step" value="2" id="slider_submit">Pledge Now!</button>
-			</div>
-			<div id="pledgeform">
 			%PLEDGEFORM%
-			</div>
 
 		</div>
 <div id="shorttext" style="display: none;">
