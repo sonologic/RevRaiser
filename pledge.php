@@ -66,8 +66,9 @@ function process_form($session_data) {
       array_push($session_data->error,$session_data->DB->ErrorMsg());
     } else {
 
-      $message=render($session_data->campaign->TEMPLATE,'pledge_mail',array('HASH'=>$hash));
+      $message=render($session_data->campaign->TEMPLATE,'pledge_mail',array('HASH'=>$hash,'AMOUNT'=>render_amount($amount)));
 
+	// send mail to pledger
       $ec=mail(
             $email,
             'Your pledge for project '.$session_data->campaign->SHORTDESC,
@@ -76,6 +77,17 @@ function process_form($session_data) {
       if(!$ec) {
         array_push($session_data->error,'Could not send confirmation email, please contact '.$session_data->campaign->ADMIN_EMAIL);
       }
+
+	// send mail to campaign admin
+      // the admin_email should already have been validated, so if this happens
+      // someone messed with it
+      if(!valid_email($session_data->campaign->ADMIN_EMAIL)) die('Some is messing with us, campaign does not have a valid admin_email defined.');
+
+      $ec=mail(
+            $session_data->campaign->ADMIN_EMAIL,
+            'Pledge for project '.$session_data->campaign->SHORTDESC,
+	    $message
+	  );
     }
 
     $session_data->pledge=TRUE;
