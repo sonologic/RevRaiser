@@ -107,6 +107,10 @@ function render_body($session_data) {
 
   if($session_data->confirm_sub!='error') {
 	// TODO: if already confirmed...
+    if($session_data->confirm_sub=='overview' && $session_data->pledge->CONFIRMED != NULL) {
+      $errors="<b>NOTE: Your pledge was already confirmed on ".$session_data->pledge->CONFIRMED."</b><br/>".$errors;
+    }
+	
     $values=array(
       'HASH' => $session_data->pledge->CONFIRM_HASH,
       'NAME' => $session_data->pledge->NAME,
