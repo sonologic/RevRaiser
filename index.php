@@ -51,7 +51,9 @@ process_form($session_data);
 $title=render_title($session_data);
 $body=render_body($session_data);
 
-//$body=render($campaign['template'],'landing',array());
+// at this point, amount pledged may have changed due to confirmation or
+// cancellation, so we re-calculate
+$session_data->campaign->PLEDGED=get_pledge_total($session_data);
 
 // render html output
 $args=array(
