@@ -7,9 +7,9 @@
 **
 **    Copyright (c) 2011 by Koen Martens
 **
-**    This file is part of Foobar.
+**    This file is part of RevRaiser.
 **
-**    Foobar is free software: you can redistribute it and/or modify
+**    RevRaiser is free software: you can redistribute it and/or modify
 **    it under the terms of the GNU General Public License as published by
 **    the Free Software Foundation, either version 3 of the License, or
 **    (at your option) any later version.
@@ -20,7 +20,7 @@
 **    GNU General Public License for more details.
 **
 **    You should have received a copy of the GNU General Public License
-**    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+**    along with RevRaiser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 function process_form($session_data) {
