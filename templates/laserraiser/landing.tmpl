@@ -8,6 +8,23 @@
 			%PLEDGEFORM%
 
 		</div>
+                <script type="text/javascript">
+                /*<![CDATA[*/
+                                $(document).ready(function() {
+                                  $('#tldr').click(function() {
+                                    $('#longtext').hide('slow');
+                                    $('#shorttext').show('slow');
+                                    return false;
+                                  });
+                                  $('#longer').click(function() {
+                                    $('#longtext').show('slow');
+                                    $('#shorttext').hide('slow');
+                                    return false;
+                                  });
+				});
+                /* ]]> */
+                </script>
+
 <div id="shorttext" style="display: none;">
 <h2>REVSPACE WANTS LASERCUTTER! WE ARE POOR SODS! WE NEED YOUR MONIEZ! PLEDGE NOW! PLEDGE LIBERALLY!</h2>
 <p>(<a href="#" id="longer">whut</a>)</p>

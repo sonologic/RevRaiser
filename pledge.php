@@ -81,7 +81,7 @@ function process_form($session_data) {
 	// send mail to campaign admin
       // the admin_email should already have been validated, so if this happens
       // someone messed with it
-      if(!valid_email($session_data->campaign->ADMIN_EMAIL)) die('Some is messing with us, campaign does not have a valid admin_email defined.');
+      if(!valid_email($session_data->campaign->ADMIN_EMAIL)) die('Someone is messing with us, campaign does not have a valid admin_email defined.');
 
       $ec=mail(
             $session_data->campaign->ADMIN_EMAIL,
