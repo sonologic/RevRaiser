@@ -1,3 +1,59 @@
+                        <script type="text/javascript">
+                        /*<![CDATA[*/
+                                $(document).ready(function() {
+					// hide pledge form when js is enabled, make it
+					// appear when clicking 'Pledge now!'
+                                  if($.getUrlVar('h')!='0') {
+                                    $('#pledgeform').hide();
+                                  }
+                                  $('#slider_submit').click(function() {
+                                    $('#pledgeopen').hide('slow');
+                                    $('#pledgeform').show('slow');
+                                  });
+
+					// hide terms when js is enabled, show link
+					// that unhides terms
+				  $('#terms_shown').hide();
+				  $('#terms_hidden').show();
+				  $('#close_terms_js').show();
+
+				  $('#open_terms').click(function() {
+				    $('#terms_hidden').hide('slow');
+				    $('#terms_shown').show('slow');
+				    return false;
+				  });
+				  $('#close_terms').click(function() {
+				    $('#terms_shown').hide('slow');
+				    $('#terms_hidden').show('slow');
+				    return false;
+				  });
+                                });
+
+$.extend({
+  getUrlVars: function(){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+  },
+  getUrlVar: function(name){
+    return $.getUrlVars()[name];
+  }
+});
+                        /* ]]> */
+                        </script>
+                        <div id="pledge_slider" class="slider">
+                                <div id="pledge_slider_handle" class="handle">drag me</div>
+                        </div>
+                        <div id="pledgeopen">
+                        <button type="submit" name="step" value="2" id="slider_submit">Pledge Now!</button>
+                        </div>
+<div id="pledgeform">
 <form method="post" action="%ACTION%">
 <p>
 %FEEDBACK%
@@ -15,6 +71,20 @@ Email:<br/>
 <input type="text" name="email" value="%EMAIL%"/><br/>
 Amount pledged:<br/>
 &euro;<input type="text" name="amount" id="pledge_amount_input" value="%AMOUNT%"/><br/>
+<div id="terms_hidden" style="display: none;">
+    <p>Please read through the <a href="#" id="open_terms">terms</a> binding your pledge. (prolly insert summary here)</p>
+</div>
+<div id="terms_shown">
+    <h1>the ten brown foxes jumped over the lazy dog</h1>
+
+    <p id="close_terms_js" style="display: none;"><a href="#" id="close_terms">(close)</a></p>
+
+    <p align="justify">Lorem ipsum dolor sit amet, per at interdum placerat suspendisse, urna mi orci quis, urna velit. Montes nibh vivamus arcu vitae fermentum. Integer ipsum adipisci consectetur, curabitur a, nec nec vulputate ut sodales risus sapien, arcu cursus sed neque a, ut est quam elit et. Maecenas nemo pharetra, sit diam, odio lacus vitae tristique. Rhoncus in ultrices leo eu accumsan, est suspendisse dolorem libero magnam ut, wisi lobortis dolor dapibus, magnis pretium velit. Consequat nec, molestie tempus tristique elit sit, a fusce a odio, eget augue aenean proin dictum culpa consectetuer, nulla in corrupti ante netus dui ipsum. Maecenas ut nunc ut maecenas at. Quis aptent integer conubia id pede, eleifend suspendisse, velit nunc amet, sed nec odio cras eu integer pede, phasellus sagittis sollicitudin massa lacus aut. Bibendum vivamus venenatis ac aliquam odio gravida.</p>
+    <p align="justify">Urna nec nisl sed posuere, convallis quam nulla, scelerisque enim aenean eget sit varius, ac est accumsan. Massa ultricies. Malesuada quam elit in amet, torquent tempor amet ligula. Elit ut, vitae sit, euismod est est. Convallis vel id, dui at, dignissim facilisi. Non gravida accumsan parturient quis, a turpis interdum, ligula augue ac sollicitudin, et metus dui, dictum potenti volutpat ultricies velit felis. Natoque massa, platea sed elementum nibh, duis non nunc arcu et luctus condimentum. Augue mi, fringilla eu malesuada, nibh posuere tellus lacus eleifend urna. Lectus sed, mauris felis semper vulputate, vitae fringilla sodales, lacus torquent at vestibulum placerat donec turpis. Integer commodo, curae scelerisque nibh sollicitudin dui, nec tortor ultrices dolor gravida nunc vestibulum, in massa odio.</p>
+    <p align="justify">In semper eget a dui donec dolor, dictum aliquam, convallis suspendisse tempus, suspendisse wisi repellat. Posuere proin class nunc, sed sodales sem, cursus nisl elit malesuada sed vel, pellentesque dolor lacus penatibus, etiam at vehicula faucibus varius id dui. Blandit aliquam, in lacus nam ullamcorper risus, wisi ipsum nunc nulla, neque eros. Ipsum convallis vestibulum neque, etiam et tortor tincidunt sed, molestie fringilla orci ligula in suspendisse, vel eleifend. Vestibulum nec eu ullamcorper turpis vitae odio, at ipsum nulla tempus dui, per non erat convallis orci. Nunc turpis ut, illum eget purus ligula, amet neque diam sem vestibulum adipiscing viverra. Velit tempor id, nibh quisque sed viverra non magnis morbi. Sem pharetra ut lectus erat, ut sodales in, ultricies mi leo, sed ac arcu enim. Quis curabitur nullam, quam leo sit cras varius mauris ut, aptent ut, eget vel arcu sem. Odio pede porttitor magnis varius molestie, fermentum non dignissim tincidunt, tellus sollicitudin, aliquet mattis at wisi risus est mollit.</p>
+
+</div>
 <input type="submit" name="pledge" value="Pledge!"/>
 </p>
 </form>
+</div>

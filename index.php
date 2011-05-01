@@ -7,20 +7,20 @@
 **
 **    Copyright (c) 2011 by Koen Martens
 **
-**    This file is part of Foobar.
+**    This file is part of RevRaiser.
 **
-**    Foobar is free software: you can redistribute it and/or modify
+**    RevRaiser is free software: you can redistribute it and/or modify
 **    it under the terms of the GNU General Public License as published by
 **    the Free Software Foundation, either version 3 of the License, or
 **    (at your option) any later version.
 **
-**    Foobar is distributed in the hope that it will be useful,
+**    RevRaiser is distributed in the hope that it will be useful,
 **    but WITHOUT ANY WARRANTY; without even the implied warranty of
 **    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **    GNU General Public License for more details.
 **
 **    You should have received a copy of the GNU General Public License
-**    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+**    along with RevRaiser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 header("Content-type: application/xhtml+xml");
@@ -42,9 +42,7 @@ if(isset($dispatch[$p])) {
 $session_data->DB=$DB;
 // TODO: implement campaign vhosting, for now select default campaign
 $session_data->campaign=get_campaign($session_data,DEFAULTCAMPAIGN);
-
-// TODO: get from db:
-$session_data->campaign->PLEDGED=166300;
+$session_data->campaign->PLEDGED=get_pledge_total($session_data);
 
 // process form
 process_form($session_data);
@@ -53,7 +51,9 @@ process_form($session_data);
 $title=render_title($session_data);
 $body=render_body($session_data);
 
-//$body=render($campaign['template'],'landing',array());
+// at this point, amount pledged may have changed due to confirmation or
+// cancellation, so we re-calculate
+$session_data->campaign->PLEDGED=get_pledge_total($session_data);
 
 // render html output
 $args=array(
@@ -62,6 +62,7 @@ $args=array(
   'GOAL' => render_amount($session_data->campaign->GOAL),
   'PLEDGED' => render_amount($session_data->campaign->PLEDGED),
   'DIFFERENCE' => render_amount($session_data->campaign->GOAL - $session_data->campaign->PLEDGED),
+  'WEBMASTEREMAIL' => WEBMASTEREMAIL,
 );
 
 // output to browser

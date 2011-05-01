@@ -7,20 +7,20 @@
 **
 **    Copyright (c) 2011 by Koen Martens
 **
-**    This file is part of Foobar.
+**    This file is part of RevRaiser.
 **
-**    Foobar is free software: you can redistribute it and/or modify
+**    RevRaiser is free software: you can redistribute it and/or modify
 **    it under the terms of the GNU General Public License as published by
 **    the Free Software Foundation, either version 3 of the License, or
 **    (at your option) any later version.
 **
-**    Foobar is distributed in the hope that it will be useful,
+**    RevRaiser is distributed in the hope that it will be useful,
 **    but WITHOUT ANY WARRANTY; without even the implied warranty of
 **    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **    GNU General Public License for more details.
 **
 **    You should have received a copy of the GNU General Public License
-**    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+**    along with RevRaiser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 function process_form($session_data) {
@@ -28,7 +28,6 @@ function process_form($session_data) {
 
   if(isset($_POST['pledge'])) {
 
-	// TODO: does adodb actually handle escaping securely ?
     $sql="insert into pledge (campaign_id,name,street_address1,street_address2,zipcode,city,country,email,amount,remark,confirm_hash) values (?,?,?,?,?,?,?,?,?,?,?)";
 
     $email=$_POST['email'];
@@ -67,8 +66,9 @@ function process_form($session_data) {
       array_push($session_data->error,$session_data->DB->ErrorMsg());
     } else {
 
-      $message=render($session_data->campaign->TEMPLATE,'pledge_mail',array('HASH'=>$hash));
+      $message=render($session_data->campaign->TEMPLATE,'pledge_mail',array('HASH'=>$hash,'AMOUNT'=>render_amount($amount)));
 
+	// send mail to pledger
       $ec=mail(
             $email,
             'Your pledge for project '.$session_data->campaign->SHORTDESC,
@@ -77,6 +77,17 @@ function process_form($session_data) {
       if(!$ec) {
         array_push($session_data->error,'Could not send confirmation email, please contact '.$session_data->campaign->ADMIN_EMAIL);
       }
+
+	// send mail to campaign admin
+      // the admin_email should already have been validated, so if this happens
+      // someone messed with it
+      if(!valid_email($session_data->campaign->ADMIN_EMAIL)) die('Someone is messing with us, campaign does not have a valid admin_email defined.');
+
+      $ec=mail(
+            $session_data->campaign->ADMIN_EMAIL,
+            'Pledge for project '.$session_data->campaign->SHORTDESC,
+	    $message
+	  );
     }
 
     $session_data->pledge=TRUE;

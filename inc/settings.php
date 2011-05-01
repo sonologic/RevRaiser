@@ -23,6 +23,9 @@
 **    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// Webmaster email
+define('WEBMASTEREMAIL','example@example.com');
+
 // URL base
 define('URLBASE','http://localhost/');
 

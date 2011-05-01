@@ -9,19 +9,43 @@
 **
 **    This file is part of RevRaiser.
 **
-**    Foobar is free software: you can redistribute it and/or modify
+**    RevRaiser is free software: you can redistribute it and/or modify
 **    it under the terms of the GNU General Public License as published by
 **    the Free Software Foundation, either version 3 of the License, or
 **    (at your option) any later version.
 **
-**    Foobar is distributed in the hope that it will be useful,
+**    RevRaiser is distributed in the hope that it will be useful,
 **    but WITHOUT ANY WARRANTY; without even the implied warranty of
 **    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 **    GNU General Public License for more details.
 **
 **    You should have received a copy of the GNU General Public License
-**    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+**    along with RevRaiser.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+function send_error_mail($session_data,$error) {
+	      // the emails should already have been validated, so if this happens
+              // someone messed with it
+            if(!valid_email($session_data->campaign->ADMIN_EMAIL))
+		die('An error occured, but campaign does not have a valid admin_email defined.');
+            if(!valid_email($session_data->pledge->EMAIL))
+		die('An error occured, but pledge does not have a valid email defined.');
+
+	    $message=render($session_data->campaign->TEMPLATE,'pledge_error_mail',array(
+				'HASH'=>$session_data->pledge->CONFIRM_HASH,
+				'AMOUNT'=>render_amount($session_data->pledge->AMOUNT),
+				'EMAIL'=>$session_data->pledge->EMAIL,
+				'ERROR'=>$error,
+	    ));
+
+      	    $ec=mail(
+              $session_data->campaign->ADMIN_EMAIL,
+              'Error on campaign '.$session_data->campaign->SHORTDESC,
+              $message
+            );
+
+	    return $ec;
+}
 
 function process_form($session_data) {
   $session_data->error=array();
@@ -50,7 +74,8 @@ function process_form($session_data) {
 	  if(!cancel_pledge($session_data,$hash)) {
             array_push($session_data->error,'Unable to cancel pledge due to database error..');
             $session_data->confirm_sub='error';
-		// TODO: send mail
+	    
+	    send_error_mail($session_data,'Unable to cancel pledge due to database error.');
           }
         } else {
           // confirm
@@ -58,7 +83,8 @@ function process_form($session_data) {
 	  if(!confirm_pledge($session_data,$hash)) {
             array_push($session_data->error,'Unable to confirm pledge due to database error..');
             $session_data->confirm_sub='error';
-		// TODO: send mail
+
+	    send_error_mail($session_data,'Unable to confirm pledge due to database error.');
           }
         }
       }
@@ -81,6 +107,10 @@ function render_body($session_data) {
 
   if($session_data->confirm_sub!='error') {
 	// TODO: if already confirmed...
+    if($session_data->confirm_sub=='overview' && $session_data->pledge->CONFIRMED != NULL) {
+      $errors="<b>NOTE: Your pledge was already confirmed on ".$session_data->pledge->CONFIRMED."</b><br/>".$errors;
+    }
+	
     $values=array(
       'HASH' => $session_data->pledge->CONFIRM_HASH,
       'NAME' => $session_data->pledge->NAME,
