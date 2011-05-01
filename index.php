@@ -60,6 +60,7 @@ $args=array(
   'GOAL' => render_amount($session_data->campaign->GOAL),
   'PLEDGED' => render_amount($session_data->campaign->PLEDGED),
   'DIFFERENCE' => render_amount($session_data->campaign->GOAL - $session_data->campaign->PLEDGED),
+  'WEBMASTEREMAIL' => WEBMASTEREMAIL,
 );
 
 // output to browser
