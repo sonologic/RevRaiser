@@ -185,4 +185,7 @@ ul.navigation li a:hover
 	text-decoration: underline;
 }
 
-
+table.incentives td
+{
+  vertical-align: top;
+}
