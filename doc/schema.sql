@@ -1,3 +1,3 @@
 CREATE TABLE campaign (id serial unique, shortdesc varchar(256), admin_email varchar(512), template varchar(32),goal int,minimum int,pledge_deadline date,payment_deadline date);
-CREATE TABLE pledge (id serial unique,campaign_id int REFERENCES campaign (id),name text,street_address1 text,street_address2 text,zipcode text,city text,country text,email text,amount int,remark text,note text,confirm_hash varchar(128) unique,payment_hash varchar(128) unique,confirmed timestamp);
+CREATE TABLE pledge (id serial unique,campaign_id int REFERENCES campaign (id),name text,street_address1 text,street_address2 text,zipcode text,city text,country text,email text,amount int,remark text,note text,confirm_hash varchar(128) unique,payment_hash varchar(128) unique,confirmed datetime);
 CREATE TABLE payment (id serial unique,campaign_id int REFERENCES campaign (id),pledge_id int REFERENCES pledge (id),amount int,note text);
