@@ -50,7 +50,7 @@ function send_error_mail($session_data,$error) {
 function process_form($session_data) {
   $session_data->error=array();
 
-  if( !isset($_GET['hash']) || !preg_match('/^([0-9a-zA-Z]+)$/',$_GET['hash'],$matches)) {
+  if( !isset($_GET['hash']) || !preg_match('/^([0-9a-zA-Z]+)\z/',$_GET['hash'],$matches)) {
     array_push($session_data->error,'Invalid hash or missing confirm option!');
   } else {
     $hash=$matches[1];
