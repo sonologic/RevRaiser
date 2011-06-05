@@ -39,9 +39,10 @@ function process_form($session_data) {
     if(!strlen($_POST['city'])) array_push($session_data->error,"Please provide city.");
     if(!strlen($_POST['country'])) array_push($session_data->error,"Please provide country.");
 
-	if ( ! preg_match( '/^\d+([.,]\d\d)?\z/', $amount ))
+    $amount = $_POST['amount'];
+	if ( ! preg_match( '/^\d{2,5}([.,]\d{2})?\z/', $amount ))
 	{
-		array_push( $session_data->error, "Amount must be in &euro;, optionally with 2 digits for cents, seperated by a comma or dot.");
+		array_push( $session_data->error, "Amount ('$amount') must be in &euro;, optionally with 2 digits for cents, seperated by a comma or dot.");
 	}
 
     $amount=100 * str_replace(',','.',$_POST['amount']);
