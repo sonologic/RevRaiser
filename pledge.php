@@ -39,6 +39,11 @@ function process_form($session_data) {
     if(!strlen($_POST['city'])) array_push($session_data->error,"Please provide city.");
     if(!strlen($_POST['country'])) array_push($session_data->error,"Please provide country.");
 
+	if ( ! preg_match( '/$\d+([.,]\d\d)?$/', $amount ))
+	{
+		array_push( $session_data->error, "Amount must be in &euro;, optionally with 2 digits for cents, seperated by a comma or dot.");
+	}
+
     $amount=100 * str_replace(',','.',$_POST['amount']);
 
     if($amount<$session_data->campaign->MINIMUM) array_push($session_data->error,"Amount must be at least &euro;".
@@ -53,7 +58,7 @@ function process_form($session_data) {
 	htmlentities($_POST['street2']),
 	htmlentities($_POST['zip']),
 	htmlentities($_POST['city']),
-        htmlentities($_POST['country']),
+	htmlentities($_POST['country']),
 	$email,
 	$amount,
 	'',
