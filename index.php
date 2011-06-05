@@ -30,7 +30,7 @@ require_once('inc/common.php');
 
 // include page rendering code dependingn on p GET parameter
 $p=(isset($_GET['p']))?$_GET['p']:'*';
-if(!preg_match('/^[a-z*]+$/',$p)) die('Invalid parameter value for p.');
+if(!preg_match('/^[a-z*]+\z/',$p)) die('Invalid parameter value for p.');
 
 if(isset($dispatch[$p])) {
   require_once($dispatch[$p]);
