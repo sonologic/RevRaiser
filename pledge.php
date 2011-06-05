@@ -65,7 +65,14 @@ function process_form($session_data) {
 	$hash,
     );
        
-    $succes=$session_data->DB->Execute($sql,$values);
+    if ( empty( $session_data->error )
+    {
+        $succes=$session_data->DB->Execute($sql,$values);
+    }
+    else
+    {
+        $succes=false;
+    }
 
     if(!$succes) { 
       array_push($session_data->error,$session_data->DB->ErrorMsg());
