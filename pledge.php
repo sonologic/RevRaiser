@@ -76,7 +76,7 @@ function process_form($session_data) {
     }
 
     if(!$succes) { 
-      array_push($session_data->error,$session_data->DB->ErrorMsg());
+      array_push($session_data->error,htmlspecialchars($session_data->DB->ErrorMsg() ) );
     } else {
 
       $message=render($session_data->campaign->TEMPLATE,'pledge_mail',array('HASH'=>$hash,'AMOUNT'=>render_amount($amount)));
